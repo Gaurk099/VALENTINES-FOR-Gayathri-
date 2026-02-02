@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
   }
   .card {
     background: white;
@@ -26,6 +26,8 @@
     animation: pop 0.8s ease;
     z-index: 10;
     position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
   }
   @keyframes pop {
     0% { transform: scale(0.8); opacity: 0; }
@@ -56,22 +58,33 @@
     border: none;
     transition: 0.2s;
   }
-  #yes { 
-    background: #ff4d6d; 
-    color: white; 
-    font-weight: bold; 
-    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); 
-  }
-  #no { 
-    background: #eee; 
-    color: #555; 
-    position: relative; 
-    z-index: 999;
-  }
-  .note { font-size: 13px; margin-top: 15px; color: #888; font-style: italic; }
+  #yes { background: #ff4d6d; color: white; font-weight: bold; }
+  #no { background: #eee; color: #555; position: relative; z-index: 999; }
   .yay { display: none; animation: fadeIn 1s ease forwards; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .yay img { width: 100%; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+  .photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .photo-gallery img { 
+    width: 100%; 
+    border-radius: 12px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+    border: 3px solid #fff;
+  }
+  .video-link-btn {
+    display: block;
+    margin: 20px 0;
+    padding: 15px;
+    background: #ff4d6d;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+  }
   .heart { position: fixed; bottom: -10px; font-size: 24px; animation: floatUp 4s linear infinite; z-index: 1; }
   @keyframes floatUp {
     from { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -94,16 +107,29 @@
       <button id="yes">Yes 💖</button>
       <button id="no">No</button>
     </div>
-    <div class="note">“No” is not an option 😌</div>
   </div>
 
   <div class="yay" id="yay">
     <div class="emoji">🥰</div>
     <h2>YAY!!! 🎉💞</h2>
-    <p style="color:#ff4d6d; font-weight:bold; margin-bottom:5px;">Ente ellam ellam alle 🥹❤️</p>
-    <p style="font-size:14px; color:#555;">Ningal illathe njan njan alla</p>
-    <img src="us-happy.jpg.jpg" alt="Us Happy">
-    <img src="us-temple.jpg.jpg" alt="Us Temple">
+    
+    <a href="https://photos.app.goo.gl/nz9YyWy2zTHCWqXW9" target="_blank" class="video-link-btn">
+      🎥 Click to Watch Our Video ❤️
+    </a>
+
+    <div class="photo-gallery">
+        <img src="us-happy.jpg.jpg" alt="Us Happy">
+        <img src="us-temple.jpg.jpg" alt="Us Temple">
+        <img src="img1.jpg.jpg.jpg" alt="Img 1">
+        <img src="img2.jpg.jpg.jpg" alt="Img 2">
+        <img src="img3.jpg.jpg.jpg" alt="Img 3">
+        <img src="img4.jpg.jpg.jpg" alt="Img 4">
+        <img src="img5.jpg.jpg.jpg" alt="Img 5">
+        <img src="img6.jpg.jpg.jpg" alt="Img 6">
+        <img src="img7.jpg.jpg.jpg" alt="Img 7">
+    </div>
+    
+    <p style="color:#ff4d6d; font-weight:bold; margin-top:20px;">Ente ellam ellam alle 🥹❤️</p>
   </div>
 </div>
 
@@ -123,22 +149,12 @@
   }
 
   noBtn.addEventListener("mouseover", moveButton);
-  noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveButton();
-  });
+  noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(); });
 
   yesBtn.addEventListener("click", () => {
     mainContent.style.display = "none";
-    document.getElementById("card").style.overflowY = "auto";
-    document.getElementById("card").style.maxHeight = "90vh";
     yay.style.display = "block";
-    
-    // Attempt to play music
-    music.play().catch(e => {
-      console.log("Auto-play blocked; music will play after interaction.");
-    });
-    
+    music.play().catch(e => console.log("Music error"));
     createHearts();
   });
 
@@ -158,6 +174,3 @@
 </script>
 </body>
 </html>
-</body>
-</html>
-
