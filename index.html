@@ -133,7 +133,12 @@
     document.getElementById("card").style.overflowY = "auto";
     document.getElementById("card").style.maxHeight = "90vh";
     yay.style.display = "block";
-    music.play().catch(e => console.log("Music error"));
+    
+    // Attempt to play music
+    music.play().catch(e => {
+      console.log("Auto-play blocked; music will play after interaction.");
+    });
+    
     createHearts();
   });
 
@@ -153,3 +158,6 @@
 </script>
 </body>
 </html>
+</body>
+</html>
+
